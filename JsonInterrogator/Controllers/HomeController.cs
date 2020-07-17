@@ -1,31 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JsonInterrogator.Models;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace JsonInterrogator.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IWebHostEnvironment _environment;
-        private IEnumerable<Person> People;
-
-        public HomeController(IWebHostEnvironment environment)
+        private readonly IRepository _repository;
+        public HomeController(IRepository repository)
         {
-            _environment = environment;
+            _repository = repository;
         }
 
         public IActionResult Index()
         {
-            string filePath = Path.Combine(_environment.WebRootPath, "data.json");
-            using (StreamReader file = System.IO.File.OpenText(filePath))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                People = (IEnumerable<Person>)serializer.Deserialize(file, typeof(IEnumerable<Person>));
-            }
-            var viewModel = new AppViewModel(People);
+            var people = _repository.Get<Person>();
+            var viewModel = new AppViewModel(people);
             return View(viewModel);
         }
     }

@@ -8,16 +8,20 @@ namespace JsonInterrogator
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _environment;
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            _environment = environment;
         }
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            const string DATA_LOCATION = "data.json";
             services.AddControllersWithViews();
+            services.AddSingleton<IRepository>(new Repository(_environment, DATA_LOCATION));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
