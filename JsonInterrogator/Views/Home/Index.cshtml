@@ -1,0 +1,60 @@
+﻿@model AppViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">What is the count of individuals over the age of 50?</h5>
+        <div class="card-text">There are @Model.CountOverAge50 individuals over the age of 50.</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Who is last individual that registered who is still active?</h5>
+        <div class="card-text">@Model.LastActivePerson.Name.First @Model.LastActivePerson.Name.Last is the last active individual.</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">What are the counts of each favorite fruit?</h5>
+        <div class="card-text">
+            <dl>
+            @foreach (var item in Model.FruitReport)
+            {
+                <dt>@item.Description</dt>
+                <dd>@item.Count</dd>
+            }
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">What is the most common eye color?</h5>
+        <div class="card-text"><span class="text-capitalize">@Model.CommonEyeColor</span> is the most common eye color.</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">What is the total balance of all individuals combined?</h5>
+        <div class="card-text">@Model.TotalBalance.ToString("c") is the total balance.</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">What is the full name of the individual with the id of "5aabbca3e58dc67745d720b1" in the format of lastname, firstname?</h5>
+        <div class="card-text">@Model.FullNameById</div>
+    </div>
+</div>
