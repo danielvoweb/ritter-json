@@ -16,12 +16,11 @@ namespace JsonInterrogator
         }
         public static IEnumerable<ReportViewModel> GetFruitReport(this IEnumerable<Person> people)
         {
-            return people.GroupBy(x => x.FavoriteFruit).Select(x => new ReportViewModel(x.Key, x.Count()));
+            return people.ToLookup(x => x.FavoriteFruit).Select(x => new ReportViewModel(x.Key, x.Count()));
         }
         public static string GetCommonEyeColor(this IEnumerable<Person> people)
         {
-            return people.GroupBy(x => x.EyeColor).Select(x => new { EyeColor = x.Key, Count = x.Count() })
-                .OrderByDescending(x => x.Count).First().EyeColor;
+            return people.ToLookup(x => x.EyeColor).OrderByDescending(x => x.Count()).First().Key;
         }
         public static decimal GetTotalBalance(this IEnumerable<Person> people)
         {
