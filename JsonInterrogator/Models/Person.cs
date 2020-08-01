@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 
 namespace JsonInterrogator.Models
@@ -12,6 +13,7 @@ namespace JsonInterrogator.Models
         public Name Name { get; set; }
         public string EyeColor { get; set; }
         public string FavoriteFruit { get; set; }
+        public DateTime Registered { get; set; }
     }
 
     public class Name

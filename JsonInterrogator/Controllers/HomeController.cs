@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JsonInterrogator.Models;
-using System.Collections.Generic;
 
 namespace JsonInterrogator.Controllers
 {

@@ -12,7 +12,7 @@ namespace JsonInterrogator
         }
         public static Person GetLastActivePerson(this IEnumerable<Person> people)
         {
-            return people.Last(x => x.IsActive);
+            return people.OrderByDescending(x => x.Registered).First(x => x.IsActive);
         }
         public static IEnumerable<ReportViewModel> GetFruitReport(this IEnumerable<Person> people)
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JsonInterrogator.Models;
@@ -29,15 +30,18 @@ namespace JsonInterrogator.Tests
         public void ReturnsLastActivePerson()
         {
             // Arrange
-            var lastActivePerson = new Person { IsActive = true };
+            var lastActivePerson = new Person { IsActive = true, Registered = DateTime.Now };
+            var lastInactivePerson = new Person { IsActive = false, Registered = DateTime.Now };
+            var pastDate = DateTime.Now.AddDays(-1);
 
             var people = new List<Person> {
-                new Person { IsActive = RandomTestValues.RandomValue.Bool() },
-                new Person { IsActive = RandomTestValues.RandomValue.Bool() },
-                new Person { IsActive = RandomTestValues.RandomValue.Bool() },
-                new Person { IsActive = RandomTestValues.RandomValue.Bool() },
                 lastActivePerson,
-                new Person { IsActive = false },
+                lastInactivePerson,
+                new Person { IsActive = RandomTestValues.RandomValue.Bool(), Registered = RandomTestValues.RandomValue.DateTime(null, pastDate)},
+                new Person { IsActive = RandomTestValues.RandomValue.Bool(), Registered = RandomTestValues.RandomValue.DateTime(null, pastDate)},
+                new Person { IsActive = RandomTestValues.RandomValue.Bool(), Registered = RandomTestValues.RandomValue.DateTime(null, pastDate)},
+                new Person { IsActive = RandomTestValues.RandomValue.Bool(), Registered = RandomTestValues.RandomValue.DateTime(null, pastDate)},
+                new Person { IsActive = RandomTestValues.RandomValue.Bool(), Registered = RandomTestValues.RandomValue.DateTime(null, pastDate)},
             };
 
             // Act
